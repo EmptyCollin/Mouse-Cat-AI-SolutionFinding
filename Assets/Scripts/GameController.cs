@@ -423,7 +423,21 @@ public class GameController : MonoBehaviour
             {
                 BoardState next = new BoardState(checkBoard, null, catsMove[i], miceMove, currentCheeses);
                 next.Gn = checkBoard.Gn + 1;
-                if (!searchList.Contains(next) && next.Gn<limit) searchList.Insert(0, next);
+                bool flag = false;
+                for (int x = 0; x < searchList.Count; x++)
+                {
+                    if (searchList[x].Equals(next))
+                    {
+                        flag = true;
+                        break;
+                    }
+
+                }
+
+                if (!flag)
+                {
+                    searchList.Add(next);
+                }
             }
 
         }
@@ -544,8 +558,19 @@ public class GameController : MonoBehaviour
         {
             BoardState next = new BoardState(checkBoard, new List<BoardState>(), catsMove[i], miceMove, currentCheeses);
             next.Gn = checkBoard.Gn + 1;
-            next.Hn = SumOfMinDistance(catsMove[i], miceMove) - currentCheeses.Count*10;
-            if (!searchList.Contains(next))
+            next.Hn = SumOfMinDistance(catsMove[i], miceMove) - currentCheeses.Count;
+
+            bool flag = false;
+            for (int x = 0; x < searchList.Count; x++) {
+                if (searchList[x].Equals(next))
+                {
+                    flag = true;
+                    break;
+                }
+
+            }
+
+            if (!flag)
             {
                 checkBoard.children.Add(next);
                 searchList.Add(next);
@@ -563,7 +588,18 @@ public class GameController : MonoBehaviour
             BoardState next = new BoardState(checkBoard, new List<BoardState>(), catsMove[i], miceMove, currentCheeses);
             next.Gn = checkBoard.Gn + 1;
             next.Hn = -currentCheeses.Count;
-            if (!searchList.Contains(next))
+            bool flag = false;
+            for (int x = 0; x < searchList.Count; x++)
+            {
+                if (searchList[x].Equals(next))
+                {
+                    flag = true;
+                    break;
+                }
+
+            }
+
+            if (!flag)
             {
                 checkBoard.children.Add(next);
                 searchList.Add(next);
@@ -581,7 +617,19 @@ public class GameController : MonoBehaviour
             BoardState next = new BoardState(checkBoard, new List<BoardState>(), catsMove[i], miceMove, currentCheeses);
             next.Gn = checkBoard.Gn + 1;
             next.Hn = SumOfMinDistance(catsMove[i], miceMove);
-            if (!searchList.Contains(next)) {
+            bool flag = false;
+            for (int x = 0; x < searchList.Count; x++)
+            {
+                if (searchList[x].Equals(next))
+                {
+                    flag = true;
+                    break;
+                }
+
+            }
+
+            if (!flag)
+            {
                 checkBoard.children.Add(next);
                 searchList.Add(next);
             }
@@ -641,7 +689,21 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < catsMove.Count; i++)
         {
             BoardState next = new BoardState(checkBoard, null, catsMove[i], miceMove, currentCheeses);
-            if(!searchList.Contains(next)) searchList.Add(next);
+            bool flag = false;
+            for (int x = 0; x < searchList.Count; x++)
+            {
+                if (searchList[x].Equals(next))
+                {
+                    flag = true;
+                    break;
+                }
+
+            }
+
+            if (!flag)
+            {
+                searchList.Add(next);
+            }
         }
     }
 
@@ -650,7 +712,20 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < catsMove.Count; i++)
         {
             BoardState next = new BoardState(checkBoard, null, catsMove[i], miceMove, currentCheeses);
-            if (!searchList.Contains(next)) searchList.Insert(0, next);
+            bool flag = false;
+            for (int x = 0; x < searchList.Count; x++)
+            {
+                if (searchList[x].Equals(next))
+                {
+                    flag = true;
+                    break;
+                }
+            }
+
+            if (!flag)
+            {
+                searchList.Add(next);
+            }
         }
     }
 
